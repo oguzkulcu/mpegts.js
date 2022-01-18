@@ -146,8 +146,11 @@ class Transmuxer {
     }
 
     _onMediaSegment(type, mediaSegment) {
+        
+        console.log("edited _onMediaSegment");
+        
         Promise.resolve().then(() => {
-            this._emitter.emit(TransmuxingEvents.MEDIA_SEGMENT, type, mediaSegment);
+            this._emitter && this._emitter.emit(TransmuxingEvents.MEDIA_SEGMENT, type, mediaSegment);
         });
     }
 
