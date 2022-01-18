@@ -87,11 +87,11 @@ class Transmuxer {
     }
 
     on(event, listener) {
-        this._emitter.addListener(event, listener);
+        this._emitter && this._emitter.addListener(event, listener);
     }
 
     off(event, listener) {
-        this._emitter.removeListener(event, listener);
+        this._emitter && this._emitter.removeListener(event, listener);
     }
 
     hasWorker() {
@@ -146,9 +146,9 @@ class Transmuxer {
     }
 
     _onMediaSegment(type, mediaSegment) {
-        
+
         console.log("edited _onMediaSegment");
-        
+
         Promise.resolve().then(() => {
             this._emitter && this._emitter.emit(TransmuxingEvents.MEDIA_SEGMENT, type, mediaSegment);
         });
@@ -156,79 +156,79 @@ class Transmuxer {
 
     _onLoadingComplete() {
         Promise.resolve().then(() => {
-            this._emitter.emit(TransmuxingEvents.LOADING_COMPLETE);
+            this._emitter && this._emitter.emit(TransmuxingEvents.LOADING_COMPLETE);
         });
     }
 
     _onRecoveredEarlyEof() {
         Promise.resolve().then(() => {
-            this._emitter.emit(TransmuxingEvents.RECOVERED_EARLY_EOF);
+            this._emitter && this._emitter.emit(TransmuxingEvents.RECOVERED_EARLY_EOF);
         });
     }
 
     _onMediaInfo(mediaInfo) {
         Promise.resolve().then(() => {
-            this._emitter.emit(TransmuxingEvents.MEDIA_INFO, mediaInfo);
+            this._emitter && this._emitter.emit(TransmuxingEvents.MEDIA_INFO, mediaInfo);
         });
     }
 
     _onMetaDataArrived(metadata) {
         Promise.resolve().then(() => {
-            this._emitter.emit(TransmuxingEvents.METADATA_ARRIVED, metadata);
+            this._emitter &&  this._emitter.emit(TransmuxingEvents.METADATA_ARRIVED, metadata);
         });
     }
 
     _onScriptDataArrived(data) {
         Promise.resolve().then(() => {
-            this._emitter.emit(TransmuxingEvents.SCRIPTDATA_ARRIVED, data);
+            this._emitter && this._emitter.emit(TransmuxingEvents.SCRIPTDATA_ARRIVED, data);
         });
     }
 
     _onTimedID3MetadataArrived (data) {
         Promise.resolve().then(() => {
-            this._emitter.emit(TransmuxingEvents.TIMED_ID3_METADATA_ARRIVED, data);
+            this._emitter && this._emitter.emit(TransmuxingEvents.TIMED_ID3_METADATA_ARRIVED, data);
         })
     }
 
     _onPESPrivateDataDescriptor(data) {
         Promise.resolve().then(() => {
-            this._emitter.emit(TransmuxingEvents.PES_PRIVATE_DATA_DESCRIPTOR, data);
+            this._emitter &&   this._emitter.emit(TransmuxingEvents.PES_PRIVATE_DATA_DESCRIPTOR, data);
         });
     }
 
     _onPESPrivateDataArrived(data) {
         Promise.resolve().then(() => {
-            this._emitter.emit(TransmuxingEvents.PES_PRIVATE_DATA_ARRIVED, data);
+            this._emitter &&  this._emitter.emit(TransmuxingEvents.PES_PRIVATE_DATA_ARRIVED, data);
         });
     }
 
     _onStatisticsInfo(statisticsInfo) {
         Promise.resolve().then(() => {
-            this._emitter.emit(TransmuxingEvents.STATISTICS_INFO, statisticsInfo);
+            this._emitter && this._emitter.emit(TransmuxingEvents.STATISTICS_INFO, statisticsInfo);
         });
     }
 
     _onIOError(type, info) {
         Promise.resolve().then(() => {
-            this._emitter.emit(TransmuxingEvents.IO_ERROR, type, info);
+            this._emitter && this._emitter.emit(TransmuxingEvents.IO_ERROR, type, info);
         });
     }
 
     _onDemuxError(type, info) {
         Promise.resolve().then(() => {
-            this._emitter.emit(TransmuxingEvents.DEMUX_ERROR, type, info);
+            this._emitter &&  this._emitter.emit(TransmuxingEvents.DEMUX_ERROR, type, info);
         });
     }
 
     _onRecommendSeekpoint(milliseconds) {
         Promise.resolve().then(() => {
-            this._emitter.emit(TransmuxingEvents.RECOMMEND_SEEKPOINT, milliseconds);
+            this._emitter && this._emitter.emit(TransmuxingEvents.RECOMMEND_SEEKPOINT, milliseconds);
         });
     }
 
     _onLoggingConfigChanged(config) {
         if (this._worker) {
-            this._worker.postMessage({cmd: 'logging_config', param: config});
+            this._emitter &&  this._worker.postMessage({cmd: 'logging_config', param: config});
         }
     }
 
