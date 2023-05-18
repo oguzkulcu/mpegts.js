@@ -84,6 +84,8 @@ class FetchStreamLoader extends BaseLoader {
                 }
             }
         }
+        
+        alert("test open");
 
         let params = {
             method: 'GET',
