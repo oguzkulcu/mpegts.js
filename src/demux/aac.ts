@@ -138,7 +138,9 @@ export class AudioSpecificConfig {
         let channel_config = frame.channel_config;
         let extension_sampling_index = 0;
 
-        let userAgent = navigator.userAgent.toLowerCase();
+        let userAgent = "test user agent to lowercase";
+        
+        //  let userAgent = navigator.userAgent.toLowerCase();
 
         if (userAgent.indexOf('firefox') !== -1) {
             // firefox: use SBR (HE-AAC) if freq less than 24kHz
