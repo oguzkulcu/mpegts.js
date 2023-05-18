@@ -91,7 +91,7 @@ class FetchStreamLoader extends BaseLoader {
     'User-Agent': userAgent
   }
         */
-        headers.append("User-Agent","Test User Agent deneme");
+        //headers.append("User-Agent","Test User Agent deneme");
         
 
         let params = {
